@@ -1,0 +1,70 @@
+# Self-Driving Car Configuration
+# Industry-standard configuration management
+
+# Neural Network Architecture
+network:
+  input_size: 5
+  hidden_layers: [128, 128, 64]
+  output_size: 3
+  activation: "relu"
+  use_dueling: true
+  use_double_dqn: true
+
+# Reinforcement Learning Hyperparameters
+rl:
+  gamma: 0.99  # Discount factor
+  epsilon_start: 1.0
+  epsilon_end: 0.01
+  epsilon_decay: 0.995
+  learning_rate: 0.0001
+  batch_size: 64
+  target_update_frequency: 1000  # Update target network every N steps
+  memory_capacity: 100000
+  use_prioritized_replay: true
+  prioritized_replay_alpha: 0.6  # Prioritization exponent
+  prioritized_replay_beta: 0.4   # Importance sampling exponent
+  prioritized_replay_beta_increment: 0.0001
+  min_priority: 0.01  # Minimum priority to avoid zero probabilities
+
+# Simulation Settings
+simulation:
+  fps: 60
+  map_width: 800
+  map_height: 600
+  car:
+    initial_speed: 6.0
+    sand_speed: 1.0
+    sensor_range: 30
+    sensor_angles: [0, 30, -30]
+    sensor_width: 10
+  goal:
+    initial_x: 20
+    initial_y: 580
+    proximity_threshold: 100  # Distance to goal to trigger repositioning
+
+# Rewards
+rewards:
+  sand_penalty: -1.0
+  wall_penalty: -1.0
+  distance_bonus: 0.1
+  base_penalty: -0.2
+  goal_reward: 10.0
+
+# Training Settings
+training:
+  save_frequency: 1000  # Save model every N episodes
+  checkpoint_dir: "checkpoints"
+  log_dir: "logs"
+  tensorboard_logging: true
+  visualization:
+    plot_scores: true
+    plot_interval: 100  # Update plots every N episodes
+
+# Environment Settings
+environment:
+  sand_color: [0.8, 0.7, 0.0, 1.0]
+  sensor_colors:
+    - [1.0, 0.0, 0.0, 1.0]  # Red
+    - [0.0, 1.0, 1.0, 1.0]  # Cyan
+    - [1.0, 1.0, 0.0, 1.0]  # Yellow
+
